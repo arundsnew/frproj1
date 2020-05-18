@@ -74,8 +74,8 @@ from keras.preprocessing.image import ImageDataGenerator
 #train_data_dir = 'monkey_breed/monkey_breed/train/'
 #validation_data_dir = 'monkey_breed/monkey_breed/validation/'
 
-train_data_dir = 'frproj1/train/'
-validation_data_dir = 'frproj1/val/'
+train_data_dir = 'data/train/'
+validation_data_dir = 'data/val/'
 
 
 # Let's use some data augmentaiton 
@@ -210,7 +210,7 @@ def getRandomImage(path):
     return cv2.imread(file_path+"/"+image_name)    
 
 for i in range(0,10):
-    input_im = getRandomImage("frproj1/val/")
+    input_im = getRandomImage("data/val/")
     input_original = input_im.copy()
     input_original = cv2.resize(input_original, None, fx=0.5, fy=0.5, interpolation = cv2.INTER_LINEAR)
     
