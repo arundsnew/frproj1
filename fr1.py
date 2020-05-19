@@ -58,7 +58,7 @@ model = Model(inputs = MobileNet.input, outputs = FC_Head)
 print(model.summary())
 
 # Set our class number to 3 (Young, Middle, Old)
-num_classes = 10
+num_classes = 5
 
 FC_Head = lw(MobileNet, num_classes)
 
@@ -138,8 +138,8 @@ nb_train_samples = 1097
 nb_validation_samples = 272
 
 # set EPOCHS 
-epochs = 10
-batch_size = 100
+epochs = 3
+batch_size = 40
 
 
 
