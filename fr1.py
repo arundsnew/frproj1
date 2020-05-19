@@ -139,7 +139,7 @@ nb_validation_samples = 25
 
 # set EPOCHS 
 epochs = 5
-batch_size = 50
+batch_size = 5
 
 
 
