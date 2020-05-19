@@ -138,7 +138,7 @@ nb_train_samples = 1097
 nb_validation_samples = 272
 
 # set EPOCHS 
-epochs = 3
+epochs = 5
 batch_size = 40
 
 
