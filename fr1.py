@@ -1,8 +1,7 @@
 
-####Using MobileNet for our Monkey Classifer
+####Face Recognition Using MobileNet
 ###Loading the MobileNet Model
 ###Freeze all layers except the top 4, as we'll only be training the top 4
-
 
 from keras.applications import MobileNet
 
@@ -25,7 +24,6 @@ for (i,layer) in enumerate(MobileNet.layers):
 	
 
 ### Let's make a function that returns our FC Head
-
 def lw(bottom_model, num_classes):
     """creates the top or head of the model that will be 
     placed ontop of the bottom layers"""
@@ -41,15 +39,14 @@ def lw(bottom_model, num_classes):
 
 
 ### Let's add our FC Head back onto MobileNet
-
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten, GlobalAveragePooling2D
 from keras.layers import Conv2D, MaxPooling2D, ZeroPadding2D
 from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 
-# Set our class number to 3 (Young, Middle, Old)
-num_classes = 10
+# Set our class number to 5 (number of classes we need to classify)
+num_classes = 5
 
 FC_Head = lw(MobileNet, num_classes)
 
@@ -57,7 +54,7 @@ model = Model(inputs = MobileNet.input, outputs = FC_Head)
 
 print(model.summary())
 
-# Set our class number to 3 (Young, Middle, Old)
+# Set our class number to 5 (number of classes we need to classify)
 num_classes = 5
 
 FC_Head = lw(MobileNet, num_classes)
@@ -67,12 +64,8 @@ model = Model(inputs = MobileNet.input, outputs = FC_Head)
 print(model.summary())
 
 
-### Loading our Monkey Breed Dataset
-
+### Loading Dataset
 from keras.preprocessing.image import ImageDataGenerator
-
-#train_data_dir = 'monkey_breed/monkey_breed/train/'
-#validation_data_dir = 'monkey_breed/monkey_breed/validation/'
 
 train_data_dir = 'data/train/'
 validation_data_dir = 'data/val/'
@@ -111,7 +104,6 @@ validation_generator = validation_datagen.flow_from_directory(
 
 from keras.optimizers import RMSprop
 from keras.callbacks import ModelCheckpoint, EarlyStopping
-
                      
 checkpoint = ModelCheckpoint("celeb_mobileNet.h5",
                              monitor="val_loss",
@@ -137,9 +129,9 @@ model.compile(loss = 'categorical_crossentropy',
 nb_train_samples = 1097
 nb_validation_samples = 272
 
-# set EPOCHS 
-epochs = 5
-batch_size = 5
+# set EPOCHS , increased to 15, and batch size to 45
+epochs = 15
+batch_size = 45
 
 
 
@@ -154,23 +146,19 @@ history = model.fit_generator(
 	
 
 ### Loading our classifer
-
 from keras.models import load_model
-
-
 classifier = load_model('celeb_mobileNet.h5')
 
 
 
 ###Testing our classifer on some test images
-
 import os
 import cv2
 import numpy as np
 from os import listdir
 from os.path import isfile, join
 
-
+#### Listing all models
 celebs_dict = {"[0]": "ben_afflek ", 
                "[1]": "elton_john",
                "[2]": "jerry_seinfeld ",
