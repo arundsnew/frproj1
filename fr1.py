@@ -158,7 +158,7 @@ import numpy as np
 from os import listdir
 from os.path import isfile, join
 
-#### Listing all models
+#### Listing all models, in this case 5 celebrities' data sets
 celebs_dict = {"[0]": "ben_afflek ", 
                "[1]": "elton_john",
                "[2]": "jerry_seinfeld ",
